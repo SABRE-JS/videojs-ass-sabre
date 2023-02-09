@@ -1,8 +1,8 @@
 {
-  "name": "videojs-ass",
-  "version": "0.8.0",
-  "author": "Sunny Li",
-  "description": "ASS/SSA subtitle overlay for videojs",
+  "name": "@sabre-js/videojs-ass-sabre",
+  "version": "1.0.0",
+  "author": "ILOVEPIE",
+  "description": "ASS/SSA subtitle overlay for videojs using SABRE.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/SunnyLi/videojs-ass.git"
@@ -18,11 +18,12 @@
     "SSA"
   ],
   "license": "Apache-2.0",
-  "main": "./src/videojs.ass.js",
+  "main": "./src/videojs.ass_sabre.js",
   "dependencies": {
-    "libjass": "0.11.0"
+    "opentype.js": "^2.0.0",
+    "@sabre-js/sabre": "^0.2.0"
   },
   "devDependencies": {
-    "video.js": "5.x"
+    "video.js": "8.x"
   }
 }

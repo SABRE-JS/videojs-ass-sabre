@@ -5,9 +5,9 @@
 
     <!-- npm -->
     <link href="node_modules/video.js/dist/video-js.min.css" rel="stylesheet">
-    <link href="node_modules/libjass/libjass.css" rel="stylesheet">
     <script src="node_modules/video.js/dist/video.min.js"></script>
-    <script src="node_modules/libjass/libjass.js"></script>
+    <script src="node_modules/opentype.js/dist/opentype.min.js"></script>
+    <script src="node_modules/@sabre-js/sabre/dist/sabre.min.js"></script>
 
     <!-- bower-->
 <!--
@@ -18,8 +18,8 @@
 -->
 
     <!-- src -->
-    <link href="src/videojs.ass.css" rel="stylesheet">
-    <script src="src/videojs.ass.js"></script>
+    <link href="src/videojs.ass_sabre.css" rel="stylesheet">
+    <script src="src/videojs.ass_sabre.js"></script>
   </head>
 
   <body>
@@ -33,29 +33,11 @@
         width: 640,
         height: 360,
         // fluid: true,
-        // plugins: {
-        //   ass: {
-        //     'src': ["subs/os.ass"],
-        //     videoWidth: 640,
-        //     videoHeight: 360,
-        //     // enableSvg: false
-        //   }
-        // },
+        plugins: {
+          ass_sabre: {}
+        },
         playbackRates: [0.5, 1, 1.5, 2]
       });
-
-      var vjs = videojs('player');
-      // initialize the plugin this way to access internal methods
-      var vjs_ass = vjs.ass({
-        'src': ["subs/os.ass"],
-        label: "engsub",
-        videoWidth: 640,
-        videoHeight: 360,
-        // enableSvg: false
-      });
-
-      // you will then be able to use the following js to switch subtitle
-      // vjs_ass.loadNewSubtitle('URL HERE')
     </script>
   </body>
 </html>

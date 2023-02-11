@@ -1,7 +1,8 @@
 /*! videojs-ass-sabre
  * Copyright (c) 2023 Patrick Rhodes Martin
  * based on videojs-ass by Sunny Li
- * Licensed under the Apache-2.0 license. */
+ * Licensed under the Apache-2.0 license. 
+ */
 (function (videojs, sabre, opentype) {
   'use strict';
 
@@ -180,10 +181,16 @@
 
     updateDisplayArea() {
       // player might not have information on video dimensions when using external providers
-      let videoWidth = this.player.videoWidth() || this.player.el().offsetWidth;
-      let videoHeight = this.player.videoHeight() || this.player.el().offsetHeight;
-      this.display.width = videoWidth;
-      this.display.height = videoHeight;
+      let videoWidth = this.player.videoWidth();
+      let elementWidth = this.player.el().offsetWidth;
+      if(!videoWidth || videoWidth > elementWidth)
+          videoWidth = elementWidth;
+      let videoHeight = this.player.videoHeight();
+      let elementHeight = this.player.el().offsetHeight;
+      if(!videoHeight || videoHeight > elementHeight)
+          videoHeight = elementHeight;
+      this.overlay.width = videoWidth;
+      this.overlay.height = videoHeight;
       if (this.cur_id >= 0) this.renderers[this.cur_id].setViewport(videoWidth, videoHeight);
     }
 

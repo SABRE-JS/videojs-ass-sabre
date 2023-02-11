@@ -180,15 +180,20 @@
     }
 
     updateDisplayArea() {
-      // player might not have information on video dimensions when using external providers
       let videoWidth = this.player.videoWidth();
-      let elementWidth = this.player.el().offsetWidth;
-      if(!videoWidth || videoWidth > elementWidth)
-          videoWidth = elementWidth;
       let videoHeight = this.player.videoHeight();
+      let ratiowh = videoWidth/videoHeight;
+      let ratiohw = videoHeight/videoWidth;
+      let elementWidth = this.player.el().offsetWidth;
       let elementHeight = this.player.el().offsetHeight;
-      if(!videoHeight || videoHeight > elementHeight)
+      if(!videoWidth || videoWidth > elementWidth){
+          videoWidth = elementWidth;
+          videoHeight = elementWidth*ratiohw;
+      }
+      if(!videoHeight || videoHeight > elementHeight){
           videoHeight = elementHeight;
+          videoWidth = elementHeight*ratiowh;
+      }
       this.overlay.width = videoWidth;
       this.overlay.height = videoHeight;
       if (this.cur_id >= 0) this.renderers[this.cur_id].setViewport(videoWidth, videoHeight);

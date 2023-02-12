@@ -4,12 +4,6 @@ Add **Advanced SubStation Alpha (ASS)** subtitles support to
 [videojs](https://github.com/videojs/video.js) using the
 [SABRE.js](https://github.com/SABRE-JS/SABRE.js) library.
 
-## Install
-
-For plugin:
-
-- `npm install videojs-ass`
-
 
 ## Usage
 

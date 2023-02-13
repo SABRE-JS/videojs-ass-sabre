@@ -206,10 +206,11 @@
 
     updateState() {
       if (this.cur_id >= 0) {
-        if (this.player.paused()) {
-          if(this.loopHandle !== null) window.cancelAnimationFrame(this.loopHandle);
+        if(this.loopHandle !== null){
+          window.cancelAnimationFrame(this.loopHandle);
           this.loopHandle = null;
-        } else {
+        }
+        if (!this.player.paused()) {
           this.loopHandle = window.requestAnimationFrame(this.loop);
         }
         this.updateDisplayArea();

@@ -212,6 +212,7 @@
         } else {
           this.loopHandle = window.requestAnimationFrame(this.loop);
         }
+        this.updateDisplayArea();
       }
     }
   }

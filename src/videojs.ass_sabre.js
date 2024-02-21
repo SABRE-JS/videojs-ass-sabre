@@ -140,7 +140,6 @@
                 player.on('fullscreenchange', this.displayUpdate);
 
                 function updateSubtitleSelections() {
-                    console.log('updateSubtitleSelections');
                     if(updatingSubtitles>0) return;
                     updatingSubtitles++;
                     let SSA_counter = 0;

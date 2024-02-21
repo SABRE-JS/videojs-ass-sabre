@@ -36,7 +36,7 @@
 
                 this.on(player, ['playing', 'pause'], this.updateState);
 
-                if (typeof options.renderMethod === 'string' && options.renderMethod === '2d') {
+                if (typeof options.renderMethod === 'string' && (options.renderMethod === '2d' || options.renderMethod === 'bitmap')) {
                     this.renderMethod = options.renderMethod;
                 }
 
@@ -140,11 +140,11 @@
                 player.on('fullscreenchange', this.displayUpdate);
 
                 function updateSubtitleSelections() {
+                    console.log('updateSubtitleSelections');
                     if(updatingSubtitles>0) return;
                     updatingSubtitles++;
                     let SSA_counter = 0;
                     let active_track = false;
-                    _this.cur_id = -1;
                     let trackElements = player.remoteTextTrackEls();
                     if (new_fonts) {
                         for (let index = 0; index < Math.min(tracks.length,trackElements.length); index++) {
@@ -171,14 +171,14 @@
                                         _this.renderers[id].loadSubtitles(subs, fonts);
                                         if(colorSpace !== null)
                                             _this.renderers[id].setColorSpace(colorSpace);
-                                        else if(!document.fullscreenElement)
-                                            _this.renderers[id].setColorSpace(sabre.VideoColorSpaces.AUTOMATIC,player.videoWidth(),player.videoHeight());
+                                        else _this.renderers[id].setColorSpace(sabre.VideoColorSpaces.AUTOMATIC,player.videoWidth(),player.videoHeight());
                                         if(track.kind === 'subtitles' && track.mode === 'showing'){
                                             _this.cur_id = id;
                                             active_track = true;
                                             overlayContainer.style.display = '';
                                         }
                                         if(active_track) _this.updateState();
+                                        updatingSubtitles--;
 
                                     },
                                     SSA_counter
@@ -196,8 +196,10 @@
                     }
 
                     if(!active_track){
+                        _this.cur_id = -1;
                         overlayContainer.style.display = 'none';
                     }
+                    _this.updateState();
                     updatingSubtitles--;
                 }
                 updateSubtitleSelections();
@@ -255,11 +257,11 @@
             }
 
             updateState() {
+                if (this.loopHandle !== null) {
+                    window.cancelAnimationFrame(this.loopHandle);
+                    this.loopHandle = null;
+                }
                 if (this.cur_id >= 0) {
-                    if (this.loopHandle !== null) {
-                        window.cancelAnimationFrame(this.loopHandle);
-                        this.loopHandle = null;
-                    }
                     if (!this.player.paused()) {
                         this.loopHandle = window.requestAnimationFrame(this.loop);
                     }

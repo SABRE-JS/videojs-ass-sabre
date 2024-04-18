@@ -5,10 +5,7 @@
   "description": "ASS/SSA subtitle overlay for videojs using SABRE.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/SunnyLi/videojs-ass.git"
-  },
-  "bugs": {
-    "url": "https://github.com/SunnyLi/videojs-ass/issues"
+    "url": "https://github.com/SABRE-JS/videojs-ass-sabre.git"
   },
   "keywords": [
     "videojs",
